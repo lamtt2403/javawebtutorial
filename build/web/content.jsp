@@ -119,11 +119,12 @@
             <hr>
             <p><%=sc.getContent()%></p>
             <hr>
-            <strong>Description</strong>
+            <div class="alert alert-info">
+                <strong><%=sc.getDescription()%></strong>
+            </div>   
             <hr>
-            <p><%=sc.getDescription()%></p>        
             <div class='alert alert-warning'>
-                <strong>Warning!</strong><%=sc.getWarning()%>
+                <strong><%=sc.getWarning()%></strong>
             </div>
             <hr>
             <%
