@@ -61,7 +61,7 @@
                 <div class='navbar-collapse'>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown pointer">
-                            <a class="dropdown-toggle nav-font">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1000&lesson_id=1000">
                                 <i class="fab fa-html5"></i>
                                 <span class="hidden-sm hidden-md">
                                     HTML
@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <li class="dropdown pointer">
-                            <a class="dropdown-toggle nav-font">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1001&lesson_id=1028">
                                 <i class="fab fa-css3"></i>
                                 <span class="hidden-sm hidden-md">
                                     CSS
@@ -77,7 +77,7 @@
                             </a>
                         </li>
                         <li class="dropdown pointer">
-                            <a class="dropdown-toggle nav-font">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1002&lesson_id=1000">
                                 <i class="fab fa-js"></i>
                                 <span class="hidden-sm hidden-md">
                                     JAVASCRIPT
