@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
                 //setting cookie to expiry in 30 mins
                 loginCookie.setMaxAge(30 * 60);
                 resp.addCookie(loginCookie);
-                resp.sendRedirect("/JavaWebTutorial/index.jsp?");
+                resp.sendRedirect("/JavaWebTutorial/index.jsp");
             } else {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/JavaWebTutorial/login.jsp");
 			PrintWriter out= resp.getWriter();

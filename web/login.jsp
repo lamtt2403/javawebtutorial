@@ -18,22 +18,22 @@
                 <div class="one-login-head">
                     <img src="images/top-lock.png" alt="" />
                     <h1>LOGIN</h1>
-
-                    <span></span>
                 </div>
                 <form action="LoginServlet" method="post">
-                    <% String mess = "";
-                                    if (request.getAttribute("mess") != null) {
-                                        mess = (String) request.getAttribute("mess");%>
+                    <%
+                        String mess = "";
+                        if (request.getAttribute("mess") != null) {
+                            mess = (String) request.getAttribute("mess");
+                    %>
                     <li style="color: red"><%=mess%></li>	
-                        <% }%>
+                    <%
+                        }
+                    %>
                     <li style="color: red"><%=err%></li>
                     Tên người dùng
-                    <li><input type="text" class="text" value=""
-                               name="msv"><a href="#" class=" icon user"></a></li>
+                    <li><input type="text" class="text" value="" name="msv"><a href="#" class=" icon user"></a></li>
                     Mật khẩu
-                    <li><input type="password" value=""
-                               name="password"><a href="#" class=" icon lock"></a></li>
+                    <li><input type="password" value="" name="password"><a href="#" class=" icon lock"></a></li>
                     <div class="p-container">
                         <label class="checkbox">
                             <input type="checkbox" name="checkbox" checked><i></i>Ghi nhớ mật khẩu</label>
