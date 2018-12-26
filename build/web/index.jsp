@@ -1,18 +1,18 @@
-<%--
-Document   : index
-Created on : Dec 22, 2018, 11:51:19 AM
-Author     : Admin
---%>
 <%@page contentType='text/html' pageEncoding='UTF-8'%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-        <script src='https://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=' crossorigin='anonymous'></script>
-        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
-        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>
-        <link rel='stylesheet' type='text/css' href='css/index.css'>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css' integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/' crossorigin='anonymous'>
+
+        <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="libs/font/Open-Sans/style.css">
+        <link rel="stylesheet" href="libs/font/Righteous-Regular/style.css">
+        <link rel='stylesheet' href='css/index.css'>
+        <link rel="stylesheet" href="libs/font-awesome/web-fonts-with-css/css/fontawesome-all.css">
+
+        <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        
         <title>Home</title>
     </head>
     <body>
@@ -20,52 +20,52 @@ Author     : Admin
             <nav class='navbar navbar-default static-navbar'>
                 <div class='navbar-header'>
                     <button type='button' class='navbar-toggle'>
-                    <span class='sr-only'>Toggle navigation</span>
-                    <span class='icon-bar'></span>
-                    <span class='icon-bar'></span>
-                    <span class='icon-bar'></span>
+                        <span class='sr-only'>Toggle navigation</span>
+                        <span class='icon-bar'></span>
+                        <span class='icon-bar'></span>
+                        <span class='icon-bar'></span>
                     </button>
-                    <a class='navbar-brand logo' ui-sref='home'>
+                    <a class='navbar-brand logo' href='/JavaWebTutorial/index.jsp'>
                         <img class='logo-img' src='images/logo-small.png' alt='logo'/>
                         <span class='hidden-sm hidden-md hidden-xs' style='font-family: Righteous'>FTutorial</span>
                     </a>
                 </div>
-                <div class='navbar-collapse' uib-collapse='vm.isNavbarCollapsed'>
+                <div class='navbar-collapse'>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown pointer" ng-class="{activehtml: vm.$state.includes('html')}">
-                            <a class="dropdown-toggle nav-font"-toggle id="html" ui-sref="html">
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1000&lesson_id=1000">
                                 <i class="fab fa-html5"></i>
                                 <span class="hidden-sm hidden-md">
                                     HTML
                                 </span>
                             </a>
                         </li>
-                        <li class="dropdown pointer" ng-class="{activecss: vm.$state.includes('css')}">
-                            <a class="dropdown-toggle nav-font" id="css" ui-sref="css">
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1001&lesson_id=1028">
                                 <i class="fab fa-css3"></i>
                                 <span class="hidden-sm hidden-md">
                                     CSS
                                 </span>
                             </a>
                         </li>
-                        <li class="dropdown pointer" ng-class="{activejs: vm.$state.includes('javascript')}">
-                            <a class="dropdown-toggle nav-font" id="javascript" ui-sref="javascript">
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1002&lesson_id=1000">
                                 <i class="fab fa-js"></i>
                                 <span class="hidden-sm hidden-md">
                                     JAVASCRIPT
                                 </span>
                             </a>
                         </li>
-                        <li class="dropdown pointer" ng-class="{activeeditor: vm.$state.includes('editor')}">
-                            <a class="dropdown-toggle nav-font" id="editor" ui-sref="editor">
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/editor.jsp">
                                 <i class="fas fa-terminal"></i>
                                 <span class="hidden-sm hidden-md">
                                     EDITOR
                                 </span>
                             </a>
                         </li>
-                        <li ng-class="{activeaccount: vm.$state.includes('account')}" class="dropdown pointer">
-                            <a class="dropdown-toggle nav-font" href="" id="account-menu">
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="" id="account-menu" data-toggle='dropdown'>
                                 <span>
                                     <i class="fas fa-user"></i>
                                     <span class="hidden-sm hidden-md">
@@ -74,37 +74,31 @@ Author     : Admin
                                     <b class="caret"></b>
                                 </span>
                             </a>
-                            <ul class="dropdown-menu"-menu>
-                                <li ui-sref-active="active">
-                                    <a ui-sref="details" >
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a>
                                         <i class="fas fa-info-circle"></i>
                                         <span>Details</span>
                                     </a>
                                 </li>
-                                <li ui-sref-active="active">
-                                    <a ui-sref="settings" >
+                                <li>
+                                    <a>
                                         <i class="fas fa-wrench"></i>
                                         <span>Settings</span>
                                     </a>
                                 </li>
-                                <li ui-sref-active="active">
-                                    <a ng-click="vm.changePassword()">
-                                        <i class="fas fa-lock"></i>
-                                        <span>Password</span>
-                                    </a>
-                                </li>
-                                <li ui-sref-active="active">
-                                    <a href="" ng-click="vm.logout()" id="logout">
+                                <li>
+                                    <a id="logout">
                                         <i class="fas fa-sign-out-alt"></i>
                                         <span>Sign out</span>
                                     </a>
                                 </li>
-                                <li ui-sref-active="active" ng-switch-when="false">
-                                    <a href="" ng-click="vm.login()" id="login">
+                                <!-- <li>
+                                    <a id="login">
                                         <i class="fas fa-sign-in-alt"></i>
                                         <span>Sign in</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>
@@ -126,7 +120,7 @@ Author     : Admin
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <button type="button" class="btn btn-html">
-                            <i class="fab fa-html5" style="font-size: 20vh;"></i>
+                                <i class="fab fa-html5" style="font-size: 20vh;"></i>
                             </button>
                         </div>
                         <div class="col-md-8" style="color: white; font-size: 2vh;">
@@ -145,7 +139,7 @@ Author     : Admin
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-css">
-                            <i class="fab fa-css3-alt" style="font-size: 20vh;"></i>
+                                <i class="fab fa-css3-alt" style="font-size: 20vh;"></i>
                             </button>
                         </div>
                     </div>
@@ -154,7 +148,7 @@ Author     : Admin
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <button type="button" class="btn btn-js">
-                            <i class="fab fa-js-square" style="font-size: 20vh;"></i>
+                                <i class="fab fa-js-square" style="font-size: 20vh;"></i>
                             </button>
                         </div>
                         <div class="col-md-8" style="color: white; font-size: 2vh;">

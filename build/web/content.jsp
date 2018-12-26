@@ -1,9 +1,3 @@
-<%-- 
-    Document   : content
-    Created on : Dec 23, 2018, 9:07:58 AM
-    Author     : Admin
---%>
-
 <%@page import="dao.SubjectDaoImpl"%>
 <%@page import="dao.LessonDaoImpl"%>
 <%@page import="dto.Lesson"%>
@@ -14,15 +8,23 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.SectionDaoImpl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <link href="css/content.css" rel='stylesheet' type='text/css' />
-        <link href="css/menu_vertical.css" rel='stylesheet' type='text/css' />
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link href="css/menu_vertical.css" rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="libs/font/Open-Sans/style.css">
+        <link rel="stylesheet" href="libs/font/Righteous-Regular/style.css">
+        <link rel='stylesheet' href='css/index.css'>
+        <link rel="stylesheet" href="libs/font-awesome/web-fonts-with-css/css/fontawesome-all.css">
+        <link rel="stylesheet" href="libs/prismjs/prism.css">
+
+        <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="libs/prismjs/prism.min.js" data-manual></script>
+
         <title>Content</title>
     </head>
     <body>
@@ -43,117 +45,208 @@
                     }
                 }
             }
+
             String lessonId = request.getParameter("lesson_id");
+            String subjectId = request.getParameter("subject_id");
             int idLesson = 1000;
+            int idSubject = 1000;
             if (lessonId != null) {
                 idLesson = Integer.parseInt(lessonId);
             }
-            List<Lesson> listLesson = new ArrayList<>();
+            if (subjectId != null) {
+                idSubject = Integer.parseInt(subjectId);
+            }
+
             LessonDaoImpl ldi = new LessonDaoImpl();
             SubjectDaoImpl sdi = new SubjectDaoImpl();
-            listLesson = ldi.getListLessonBySubjectID(1000);
-            String state = sdi.getSubjectBySubjectID(1000).getState();
+            List<Lesson> listLesson = ldi.getListLessonBySubjectID(idSubject);
 
             SectionDaoImpl secdi = new SectionDaoImpl();
             SectionContentDaoImpl scdi = new SectionContentDaoImpl();
-            List<Section> ls = new ArrayList();
             List<SectionContent> lsc = new ArrayList();
-            ls = secdi.getListSectionById(idLesson);
-            for (Section s : ls) {
+            List<Section> sections = secdi.getListSectionById(idLesson);
+            for (Section s : sections) {
                 lsc.add(scdi.getSectionContentBySecID(s.getIdSection()));
                 System.out.println(s.getName());
             }
+            String lessonName = "";
         %>
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-md navbar-dark bg-light static-top navbar-fixed-top">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <a href="/JavaWebTutorial/index.jsp" title=""><img src="logo/logo.png" alt="" ></a>
-                        <p class="text-dark font-weight-bold">FTutorial</p>
-
-
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+        <div>
+            <nav class='navbar navbar-default static-navbar'>
+                <div class='navbar-header'>
+                    <button type='button' class='navbar-toggle'>
+                        <span class='sr-only'>Toggle navigation</span>
+                        <span class='icon-bar'></span>
+                        <span class='icon-bar'></span>
+                        <span class='icon-bar'></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto ">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark"  href="/JavaWebTutorial/index.jsp"><i class="fas fa-home"></i> Home
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/JavaWebTutorial/content.jsp?lesson_id=1000" class="nav-link text-dark"><i class="fab fa-html5"></i> HTML</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/JavaWebTutorial/content.jsp?lesson_id=1028" class="nav-link text-dark"><i class="fab fa-css3"></i> CSS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/JavaWebTutorial/content.jsp?lesson_id=1000" class="nav-link text-dark"><i class="fab fa-js-square"></i> JAVASCRIPT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link text-dark"><i class="fas fa-user"></i> ACCOUNT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link text-dark" action="LogoutServlet" method="post" value ="LOGOUT"><i class="fas fa-tools"></i> LOGOUT</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <a class='navbar-brand logo' href='/JavaWebTutorial/index.jsp'>
+                        <img class='logo-img' src='images/logo-small.png' alt='logo'/>
+                        <span class='hidden-sm hidden-md hidden-xs' style='font-family: Righteous'>FTutorial</span>
+                    </a>
+                </div>
+                <div class='navbar-collapse'>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1000&lesson_id=1000">
+                                <i class="fab fa-html5"></i>
+                                <span class="hidden-sm hidden-md">
+                                    HTML
+                                </span>
+                            </a>
+                        </li>
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1001&lesson_id=1028">
+                                <i class="fab fa-css3"></i>
+                                <span class="hidden-sm hidden-md">
+                                    CSS
+                                </span>
+                            </a>
+                        </li>
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/content.jsp?subject_id=1002&lesson_id=1000">
+                                <i class="fab fa-js"></i>
+                                <span class="hidden-sm hidden-md">
+                                    JAVASCRIPT
+                                </span>
+                            </a>
+                        </li>
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="/JavaWebTutorial/editor.jsp">
+                                <i class="fas fa-terminal"></i>
+                                <span class="hidden-sm hidden-md">
+                                    EDITOR
+                                </span>
+                            </a>
+                        </li>
+                        <li class="dropdown pointer">
+                            <a class="dropdown-toggle nav-font" href="" id="account-menu" data-toggle='dropdown'>
+                                <span>
+                                    <i class="fas fa-user"></i>
+                                    <span class="hidden-sm hidden-md">
+                                        ACCOUNT
+                                    </span>
+                                    <b class="caret"></b>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a>
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Details</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="fas fa-wrench"></i>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logout" action="LogoutServlet" method="post">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>Sign out</span>
+                                    </a>
+                                </li>
+                                <!-- <li>
+                                    <a id="login">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                        <span>Sign in</span>
+                                    </a>
+                                </li> -->
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>
 
-
-        <div class ="main">
-            <%                for (int i = 0; i < lsc.size(); i++) {
-                    SectionContent sc = lsc.get(i);
-                    String nameSection = ls.get(i).getName();
-                    if (sc.getDescription()==null){
-                        sc.setDescription("");                      
-                    }
-                    if (sc.getWarning() ==null) {
-                        sc.setWarning("");                      
-                    }
-            %>
-            <h5> <%=nameSection%></h5>
-            <hr>
-            <p><%=sc.getContent()%></p>
-            <hr>
-            <div class="alert alert-info">
-                <strong><%=sc.getDescription()%></strong>
-            </div>   
-            <hr>
-            <div class='alert alert-warning'>
-                <strong><%=sc.getWarning()%></strong>
-            </div>
-            <hr>
-            <%
-                }
-            %>
-        </div>
-
-
-        <div class ="left">
-            <div class="vertical-menu" id="menu">
+        <div class="progress-bar-left">
+            <div class="list-group list-group-flush sidenav hidden-xs hidden-sm">
                 <%
                     for (Lesson l : listLesson) {
-                        boolean isActice = false;
                         if (l.getId() == idLesson) {
-                            isActice = true;
-                        }
+                            lessonName = l.getName();
                 %>
-                <a href="content.jsp?lesson_id=<%=l.getId()%>"<%
-                    if (isActice) { %>
-                   class="active" 
-                   <%} else {%>
-                   class=""
-                   <%}%>><%=l.getName()%></a>
+                <a class="list-group-item list-group-item-action active" href="content.jsp?subject_id=<%=idSubject%>&lesson_id=<%=l.getId()%>"><%=l.getName()%></a>
+                <%
+                } else {
+                %>
+                <a class="list-group-item list-group-item-action" href="content.jsp?subject_id=<%=idSubject%>&lesson_id=<%=l.getId()%>"><%=l.getName()%></a>
                 <%
                     }
                 %>
-            </div> 
-
+                <%
+                    }
+                %>
+            </div>
         </div>
-        <script type="text/javascript" src="js/bootstrap.js"></script>         
+
+        <div class="progress-bar-right">
+            <div class="hidden-xs hidden-sm sidenav" style="padding-left: 10px; padding-right: 10px;">
+                <h5>Follow us</h5>
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fftutorialnth%2F&tabs=timeline&width=250&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=557851737992275" width="225" height="350" style="border: none; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                <div style="margin-top: 20px;">
+                    <h5>Color Picker</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="container well" style="margin-top: 65px;">
+            <div class="lesson-nav">
+                <div style="display: flex; align-items: center;">
+                    <button type="button" class="btn btn-default">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+                <span style="font-weight: bold; font-size:40px; flex-grow: 1; text-align: center;"><%= lessonName%></span>
+                <div style="display: flex; align-items: center;">
+                    <button type="button" class="btn btn-default">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <ol>
+                <div class="content-frame">
+                    <%
+                        for (int i = 0; i < lsc.size(); i++) {
+                            SectionContent sc = lsc.get(i);
+                            String nameSection = sections.get(i).getName();
+                    %>
+                    <li style="font-weight: bold; font-size: 24px;"><%= nameSection%></li>
+                    <p><%= sc.getContent()%></p>
+                    <%
+                        if (sc.getDescription() != null) {
+                    %>
+                    <p class="description"><%= sc.getDescription()%></p>
+                    <%
+                        }
+                        if (sc.getWarning() != null) {
+                    %>
+                    <p class='warning-frame'><%= sc.getWarning()%></p>
+                    <%
+                        }
+                    %>
+                    <hr>
+                    <%
+                        }
+                    %>
+                </div>
+            </ol>
+
+            <div style="margin-bottom: 70px; display: flex; justify-content: center;">
+                <button type="button" class="btn btn-default" style="float: left;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div style="flex-grow: 1; justify-content: center; display: flex;">
+                    <button type="button" class="btn btn-success" onclick="">
+                        <i class="fas fa-check-circle"></i>&nbsp;<span>Take a Test</span>
+                    </button>
+                </div>
+                <button type="button" class="btn btn-default" style="float: right;">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
     </body>
 </html>

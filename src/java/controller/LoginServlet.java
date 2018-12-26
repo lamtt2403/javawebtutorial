@@ -5,7 +5,6 @@
  */
 package controller;
 
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.CookieHandler;
@@ -61,7 +60,7 @@ public class LoginServlet extends HttpServlet {
                 //setting cookie to expiry in 30 mins
                 loginCookie.setMaxAge(30 * 60);
                 resp.addCookie(loginCookie);
-                resp.sendRedirect("/JavaWebTutorial/content.jsp?lesson_id=1000");
+                resp.sendRedirect("/JavaWebTutorial/index.jsp?");
             } else {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/JavaWebTutorial/login.jsp");
 			PrintWriter out= resp.getWriter();
@@ -71,16 +70,7 @@ public class LoginServlet extends HttpServlet {
             }
 
         } catch (Exception ex) {
-
-//        String err= "";
-//        String url = "/login.jsp";
-//        
-//        
-//        if(msv.equals("admin") && pass.equals("admin")){
-//            resp.sendRedirect("/JavaWebTutorial/content.jsp?lesson_id=1000");
-//        }else {
-//            resp.sendRedirect("/login.jsp");
-//        }
+            
         }
     }
 
