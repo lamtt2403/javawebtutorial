@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/JavaWebTutorial/web/css/menu_vertical.css</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/JavaWebTutorial/web/content.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/JavaWebTutorial/src/conf/MANIFEST.MF</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/JavaWebTutorial/web/menu_vertical.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/JavaWebTutorial/src/java/controller/LoginServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/JavaWebTutorial/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/JavaWebTutorial/src/java/utils/Qldt.java</file>
+            <file>file:/C:/Users/dangc/Documents/javawebtutorial/src/java/connect_db/ConnectDB.java</file>
+            <file>file:/C:/Users/dangc/Documents/javawebtutorial/web/login.jsp</file>
+            <file>file:/C:/Users/dangc/Documents/javawebtutorial/src/java/controller/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>
