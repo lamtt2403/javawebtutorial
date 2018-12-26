@@ -20,7 +20,7 @@ public class ConnectDB {
     Connection connect = null;
     ResultSet rs = null;
     String user = "root";
-    String pass = "1234";
+    String pass = "0000";
 
     public void hasDriver() throws Exception {
         try {
@@ -32,7 +32,7 @@ public class ConnectDB {
 
     public Connection openConnect() throws Exception {
             hasDriver();
-            String url = "jdbc:mysql://localhost:3306/webtutorial";
+            String url = "jdbc:mysql://localhost:3306/web";
             try {
                 this.connect = DriverManager.getConnection(url, user, pass);
                 System.out.println("Đã kết nối");

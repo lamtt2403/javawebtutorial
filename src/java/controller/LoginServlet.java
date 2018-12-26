@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
             http.GetCookie(mainQLDT);
             String postParams = http.getFormParams(msv, pass);
             http.sendPost(defaultQLDT, postParams);
-            if (http.checkLogin(msv) || msv.equals("admin") && pass.equals("admin")) {
+            if (http.checkLogin(msv) || (msv.equals("admin") && pass.equals("admin"))) {
                 HttpSession session = req.getSession();
                 session.setAttribute("msv", msv);
                 //setting session to expiry in 30 mins

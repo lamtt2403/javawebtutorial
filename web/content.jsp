@@ -20,7 +20,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/content.css" rel='stylesheet' type='text/css' />
         <link href="css/menu_vertical.css" rel='stylesheet' type='text/css' />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <title>Content</title>
@@ -48,7 +48,7 @@
             if (lessonId != null) {
                 idLesson = Integer.parseInt(lessonId);
             }
-            List<Lesson> listLesson = new ArrayList<Lesson>();
+            List<Lesson> listLesson = new ArrayList<>();
             LessonDaoImpl ldi = new LessonDaoImpl();
             SubjectDaoImpl sdi = new SubjectDaoImpl();
             listLesson = ldi.getListLessonBySubjectID(1000);
