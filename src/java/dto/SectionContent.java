@@ -5,6 +5,8 @@
  */
 package dto;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 /**
  *
  * @author Admin
@@ -66,7 +68,7 @@ public class SectionContent {
     }
 
     public String getCode() {
-        return code;
+        return StringEscapeUtils.escapeJavaScript(code);
     }
 
     public void setCode(String code) {

@@ -24,6 +24,7 @@
         <script src="libs/jquery/dist/jquery.js"></script>
         <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="libs/prismjs/prism.min.js" data-manual></script>
+        <script src="js/learn.controller.js"></script>
 
         <title>Content</title>
     </head>
@@ -224,6 +225,17 @@
                         if (sc.getWarning() != null) {
                     %>
                     <p class='warning-frame'><%= sc.getWarning()%></p>
+                    <%
+                        }
+                        if (sc.getCode() != null) {
+                    %>
+                    <div class='demo-frame code-frame'>
+                    <pre class="language-markup" style='font-size: 14px;'><code class="language-markup" id="<%=sc.getId()%>"><script>highlight("<%=sc.getId()%>", '<%=sc.getCode()%>', "<%=sc.getLanguage()%>");</script></code></pre>
+                    <button type='button' class='btn btn-success'>
+                    <span>Practise</span>&nbsp;
+                    <i class='fas fa-arrow-circle-right'></i>
+                    </button>
+                    </div>
                     <%
                         }
                     %>
