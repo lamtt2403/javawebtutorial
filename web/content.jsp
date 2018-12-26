@@ -217,16 +217,6 @@
                     <li style="font-weight: bold; font-size: 24px;"><%= nameSection%></li>
                     <p><%= sc.getContent()%></p>
                     <%
-                        if (sc.getDescription() != null) {
-                    %>
-                    <p class="description"><%= sc.getDescription()%></p>
-                    <%
-                        }
-                        if (sc.getWarning() != null) {
-                    %>
-                    <p class='warning-frame'><%= sc.getWarning()%></p>
-                    <%
-                        }
                         if (sc.getCode() != null) {
                     %>
                     <div class='demo-frame code-frame'>
@@ -236,6 +226,16 @@
                     <i class='fas fa-arrow-circle-right'></i>
                     </button>
                     </div>
+                    <%
+                        }
+                        if (sc.getDescription() != null) {
+                    %>
+                    <p class="description"><%= sc.getDescription()%></p>
+                    <%
+                        }
+                        if (sc.getWarning() != null) {
+                    %>
+                    <p class='warning-frame'><%= sc.getWarning()%></p>
                     <%
                         }
                     %>
