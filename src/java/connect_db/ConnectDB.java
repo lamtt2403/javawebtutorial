@@ -20,7 +20,7 @@ public class ConnectDB {
     Connection connect = null;
     ResultSet rs = null;
     String user = "root";
-    String pass = "0000";
+    String pass = "1997";
 
     public void hasDriver() throws Exception {
         try {

@@ -1,3 +1,4 @@
+<%@page import="utils.MyUtils"%>
 <%@page import="dao.SubjectDaoImpl"%>
 <%@page import="dao.LessonDaoImpl"%>
 <%@page import="dto.Lesson"%>
@@ -23,12 +24,13 @@
 
         <script src="libs/jquery/dist/jquery.js"></script>
         <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="libs/prismjs/prism.min.js" data-manual></script>
-
+        <script src="libs/prismjs/prism.min.js" data-manual></script>     
         <title>Content</title>
     </head>
+
     <body>
         <%
+            
             String msv = null;
             if (session.getAttribute("msv") == null) {
                 response.sendRedirect("/JavaWebTutorial/login.jsp");
@@ -70,6 +72,7 @@
                 System.out.println(s.getName());
             }
             String lessonName = "";
+            int positionLesson = MyUtils.getPostionLesson(idLesson, listLesson);
         %>
         <div>
             <nav class='navbar navbar-default static-navbar'>
@@ -195,13 +198,15 @@
         <div class="container well" style="margin-top: 65px;">
             <div class="lesson-nav">
                 <div style="display: flex; align-items: center;">
-                    <button type="button" class="btn btn-default">
+                    <button type="button" class="btn btn-default" 
+                            onclick="openPage('<%=MyUtils.setUrlBack(positionLesson, idSubject, listLesson)%>')">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                 </div>
                 <span style="font-weight: bold; font-size:40px; flex-grow: 1; text-align: center;"><%= lessonName%></span>
                 <div style="display: flex; align-items: center;">
-                    <button type="button" class="btn btn-default">
+                    <button type="button" class="btn btn-default" 
+                            onclick="openPage('<%=MyUtils.setUrlNext(positionLesson, idSubject, listLesson)%>')">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
@@ -235,18 +240,27 @@
             </ol>
 
             <div style="margin-bottom: 70px; display: flex; justify-content: center;">
-                <button type="button" class="btn btn-default" style="float: left;">
+                <button type="button" class="btn btn-default" style="float: left;" 
+                        onclick="openPage('<%=MyUtils.setUrlBack(positionLesson, idSubject, listLesson)%>')">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <div style="flex-grow: 1; justify-content: center; display: flex;">
-                    <button type="button" class="btn btn-success" onclick="">
+                    <button type="button" class="btn btn-success" 
+                            onclick="openPage('take_a_test.jsp?lesson_id=<%=lessonId%>')">
                         <i class="fas fa-check-circle"></i>&nbsp;<span>Take a Test</span>
                     </button>
                 </div>
-                <button type="button" class="btn btn-default" style="float: right;">
+                        <button type="button" class="btn btn-default" style="float: right;"
+                                onclick="openPage('<%=MyUtils.setUrlNext(positionLesson, idSubject, listLesson)%>')">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
         </div>
     </body>
+    <script type="text/javascript">
+        function openPage(pageURL)
+        {
+            window.location.href = pageURL;
+        }
+    </script>
 </html>
