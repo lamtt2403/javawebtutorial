@@ -7,7 +7,6 @@ package dao;
 
 import connect_db.ConnectDB;
 import dto.Lesson;
-import dto.Section;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,9 +29,8 @@ public class LessonDaoImpl implements LessonDAO{
     
     @Override
     public List<Lesson> getListLessonBySubjectID(int subjectID) {
-        List<Lesson> sectionList = new ArrayList<Lesson>();
+        List<Lesson> sectionList = new ArrayList<>();
         try {
-
             Connection conn = new ConnectDB().openConnect();
             String sql = "SELECT * FROM " + TABLE + " WHERE " 
                     + COLUM_SUBJECT_ID + " = '" + subjectID + "'" ;
@@ -47,7 +45,7 @@ public class LessonDaoImpl implements LessonDAO{
                 sectionList.add(s);
                 System.out.println(s.toString());
             }
-             conn.close();
+            conn.close();
         } catch (Exception ex) {
             Logger.getLogger(SectionDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
