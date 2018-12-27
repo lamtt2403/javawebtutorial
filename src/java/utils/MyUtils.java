@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package utils;
+import dto.Lesson;
 import dto.User;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
  
 import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
@@ -74,5 +77,50 @@ public class MyUtils {
         cookieUserName.setMaxAge(0);
         response.addCookie(cookieUserName);
     }
- 
+    
+    public static int getPostionLesson(int lessonID, List<Lesson> lessonList){
+        int position = 0;
+        for (int i = 0; i < lessonList.size(); i++){
+            if(lessonID == lessonList.get(i).getId()){
+                position = i;
+                return position;
+            }
+        }
+        return position;
+    }
+    
+    public static String setUrlNext(int positionLesson,int subjectID, List<Lesson> listLesson){
+        if(positionLesson == listLesson.size() - 1){
+            positionLesson = 0;
+        }else {
+            positionLesson ++;
+        }
+        int lessonID = listLesson.get(positionLesson).getId();
+        String url = "content.jsp?subject_id="+ subjectID + "&lesson_id="+ lessonID;
+        return url;
+    }
+    
+    
+    public static String setUrlBack(int positionLesson,int subjectID, List<Lesson> listLesson){
+        if(positionLesson == 0){
+            positionLesson = listLesson.size() - 1 ;
+        }else {
+            positionLesson --;
+        }
+        int lessonID = listLesson.get(positionLesson).getId();
+        String url = "content.jsp?subject_id="+ subjectID + "&lesson_id="+ lessonID;
+        return url;
+    }
+    
+    public static void main(String[] args) {
+        List<Lesson> lessonList = new ArrayList<>();
+        lessonList.add(new Lesson(1, 1, "1", "2"));
+                lessonList.add(new Lesson(2, 2, "1", "2"));
+        lessonList.add(new Lesson(3, 4, "1", "2"));
+        lessonList.add(new Lesson(5, 6, "1", "2"));
+        
+        System.out.println(""+ getPostionLesson(5, lessonList));
+
+    }
+    
 }
