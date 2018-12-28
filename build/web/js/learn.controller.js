@@ -9,6 +9,7 @@ function highlight(id, string, language) {
 
 // Bat su kien dong cua so
 window.onbeforeunload = function(event) {
+    var timeend = new Date().toLocaleString();
     // $http.get('/api/lessons/get-lesson-id?state=' + $state.current.name).then(onSuccess, onError);
     return "Closed";
 }
