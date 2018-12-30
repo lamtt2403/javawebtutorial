@@ -1,3 +1,9 @@
+<%@page import="dto.EditorCode"%>
+<%@page import="utils.MyUtils"%>
+<%@page import="dao.SectionContentDaoImpl"%>
+<%@page import="dto.SectionContent"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,6 +50,47 @@
         <title>Online Editor</title>
     </head>
     <body>
+        <%
+            String resultCode = "";
+            String htmlCode = "";
+            String cssCode = "";
+            String jsCode = "";
+            EditorCode editorCode;
+            int idSubject = 1000;
+            if (request != null) {
+                    String subjectId = request.getParameter("subject_id");                
+                    idSubject = Integer.parseInt(subjectId);
+                if(idSubject == 1004){
+                    System.out.println("htmlCode : " + htmlCode); 
+                    editorCode = (EditorCode) session.getAttribute("EditorCode");
+                    htmlCode = editorCode.getHtml();
+                    cssCode = editorCode.getCss();
+                    jsCode = editorCode.getJs();
+                    resultCode = editorCode.resultCode();
+                        out.print(resultCode);
+                }else{
+                    
+                    String sectionContentID = request.getParameter("sectioncontent_id");
+                    int idSectionC = Integer.parseInt(sectionContentID);
+                    SectionContent content = new SectionContentDaoImpl()
+                        .getSectionContentBySecID(idSectionC);
+                    if (idSubject == 1000) {
+                        htmlCode = content.getCode();
+                        resultCode = MyUtils.compileCode(htmlCode, "", "");
+                    }else if(idSubject == 1001){
+                        cssCode = content.getCode();
+                        resultCode = MyUtils.compileCode("", cssCode, "");
+                    }else if(idSubject == 1002){
+                        jsCode = content.getCode();
+                        resultCode = MyUtils.compileCode("", "", jsCode);
+                    }
+                    
+                  out.print(resultCode);
+                }
+                
+            }
+
+        %>
         <div>
             <nav class='navbar navbar-default static-navbar'>
                 <div class='navbar-header'>
@@ -133,52 +180,69 @@
                 </div>
             </nav>
         </div>
-        <div class="demo-frame editor-frame">
-            <div class="row" style="margin-top: 65px;">
-                <div class="col-md-6" style="display: flex; flex-direction: row; margin-bottom: 10px;">
-                    <div class="dropdown" style="margin-right: 10px;">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose Theme
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a onclick="return changeTheme('default')">Default</a></li>
-                            <li><a onclick="return changeTheme('monokai')">Monokai</a></li>
-                            <li><a onclick="return changeTheme('material')">Material</a></li>
-                        </ul>
+        <form action ="EditorServlet" method="post" >
+            <div class="demo-frame editor-frame">
+                <div class="row" style="margin-top: 65px;">
+                    <div class="col-md-6" style="display: flex; flex-direction: row; margin-bottom: 10px;">
+                        <div class="dropdown" style="margin-right: 10px;">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose Theme
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a onclick="return changeTheme('default')">Default</a></li>
+                                <li><a onclick="return changeTheme('monokai')">Monokai</a></li>
+                                <li><a onclick="return changeTheme('material')">Material</a></li>
+                            </ul>
+                        </div>
+                        <div style="margin-right: 10px;">
+                            <button type="button" class="btn btn-success" onclick="">
+                                <i class="fas fa-save"></i>
+                                <span>Save</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-play"></i>
+                                <span>Run</span>
+                            </button>
+                        </div>
                     </div>
-                    <div style="margin-right: 10px;">
-                        <button type="button" class="btn btn-success" ng-click="vm.save()">
-                            <i class="fas fa-save"></i>
-                            <span>Save</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button type="button" class="btn btn-primary" ng-click="vm.run()">
-                            <i class="fas fa-play"></i>
-                            <span>Run</span>
-                        </button>
-                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <span style="font-size: 20px;">HTML</span>
-                    <textarea id="htmlEditor" style="display: none;"></textarea>
-                </div>
-                <div class="col-md-4">
-                    <span style="font-size: 20px;">CSS</span>
-                    <textarea id="cssEditor" style="display: none;"></textarea>
-                </div>
-                <div class="col-md-4">
-                    <span style="font-size: 20px;">Javascript</span>
-                    <textarea id="jsEditor" style="display: none;"></textarea>
-                </div>
-                <div class="col-md-12">
-                    <span style="font-size: 20px;">Result</span>
-                    <iframe id="result" style="width: 100%; height: 500px; background-color: white; border: 1px solid #9E9E9E;"></iframe>
-                </div>
-            </div>
-        </div>
+                <div class="row">
 
+                    <div class="col-md-4">
+                        <span style="font-size: 20px;">HTML</span>
+                        <textarea name="htmlEditor" id="htmlEditor" style="display: none;">
+                        </textarea>
+                    </div>
+
+                    <div class="col-md-4">
+                        <span style="font-size: 20px;">CSS</span>
+                        <textarea name="cssEditor" id="cssEditor" style="display: none;">
+                        </textarea>
+                    </div>
+
+                    <div class="col-md-4">
+                        <span style="font-size: 20px;">Javascript</span>
+                        <textarea name="jsEditor" id="jsEditor" style="display: none;">
+                        </textarea>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </form>   
+        <div class="col-md-12">
+                        <span style="font-size: 20px;">Result</span>
+                        <textarea id="result" style="width: 100%; height: 500px; background-color: white; border: 1px solid #9E9E9E;"> 
+                        </textarea>           
+        </div>
         <script src="js/editor.controller.js"></script>
+        <script>
+            <%if (request != null) {%>
+                load("htmlEditor", "<%=MyUtils.getCodePractiseHTML(idSubject, htmlCode)%>");
+                load("cssEditor", "<%=MyUtils.getCodePractiseCSS(idSubject, cssCode)%>");
+                load("jsEditor", "<%=MyUtils.getCodePractiseJS(idSubject, jsCode)%>");
+            <%}%>
+        </script>
     </body>
 </html>

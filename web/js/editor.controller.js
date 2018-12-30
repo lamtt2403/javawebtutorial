@@ -1,4 +1,3 @@
-
 var editorSetting = {
     lineNumbers: true,
     mode: "htmlmixed",
@@ -37,12 +36,28 @@ function validate(editor) {
     return result;
 }
 
+function get(id){
+    return document.getElementById(id).value
+}
+
+function load(id, code) {
+    if (id == "htmlEditor") {
+        htmlEditor.getDoc().setValue(code);
+    } else if (id == "cssEditor") {
+        cssEditor.getDoc().setValue(code);
+    } else if (id == "jsEditor") {
+        jsEditor.getDoc().setValue(code);
+    }else {
+        result.getDoc().setValue(code);
+    }
+}
+
 function run() {
     if (validate(htmlEditor.getAllMarks()) && validate(cssEditor.getAllMarks()) && validate(jsEditor.getAllMarks()))
         $http.post('api/demo-code/compile', {
-            html: vm.htmlEditor.getValue(),
-            css: vm.cssEditor.getValue(),
-            javascript: vm.jsEditor.getValue()
+            html: htmlEditor.getValue(),
+            css: cssEditor.getValue(),
+            javascript: jsEditor.getValue()
         }).then(
             function onSuccess(response) {
                 document.getElementById("result").contentWindow.document.open();
